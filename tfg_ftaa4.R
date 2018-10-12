@@ -1,5 +1,5 @@
 
- 
+   
 so <- 'mac'
 if (so == 'mac'){
   main_path <- "/Users/Diosdenombrecarlos/Desktop/TFG"
