@@ -1,0 +1,474 @@
+%Encabezado Típico Español
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc} % Usa la codificación mas aceptada
+\usepackage[T1]{fontenc} %letras acentuadas
+\usepackage[spanish,activeacute]{babel} % español, reconoce el apóstrofre como tilde
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage[round]{natbib}
+\usepackage{endnotes}
+\usepackage{subcaption}
+
+
+\pagestyle{fancy}
+\fancyhf{} % Borra todas las cabeceras y estilos por defecto
+\lhead{}
+\chead{}
+\rhead{Impacto de la meteorología en la concentración de $O_3$}
+\lfoot{}
+\cfoot{}
+\rfoot{\thepage}
+\renewcommand{\headrulewidth}{1pt}
+
+
+
+
+\begin{document}
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE Universidad Complutense de Madrid}\\[1.5cm] % Name of your university/college
+\textsc{\Large Física de la Tierra, Astronomía y Astrofísica:}\\[0.5cm] % Major heading such as course name
+%\textsc{\large Impacto de la meteorología en la concentración de ozono}\\[0.5cm] % Minor heading such as course title
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Impacto de la meteorología en la concentración de ozono troposférico }\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Autor}\\
+Carlos Mougan Navarro  % Your name
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Tutor} \\
+Carlos Ordoñez Garcia% Supervisor's Name
+\end{flushright}
+\end{minipage}\\[2cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+%{\large \today}\\[2cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+\includegraphics[width=0.3\textwidth]{ucm.jpg}
+\hspace{2cm}
+\includegraphics[width=0.3\textwidth]{fisica.jpeg}
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+
+\newpage
+%\vspace*{300px}
+%\begin{flushright}
+%\textit{El impacto del cambio climático mundial \\puede presentar un desafío mayor que cualquier otro\\ al que se haya enfrentado la humanidad,\\ con la excepción del de impedir una guerra nuclear} \\Gro Harlem, ONU
+%\textit{Me pregunto cómo alguien puede decir lo que\\  el cambio climático afectará en 300 años \\si no se es capaz de predecir \\el tiempo en una semana} \\ Mariano Rajoy
+%\end{flushright}
+\newpage
+\tableofcontents
+\listoffigures
+\listoftables
+
+
+
+\newpage
+\begin{center}
+
+
+
+\section{Resumen}
+El objetivo de este trabajo  es analizar las variables meteorológicas más importantes en la variación de la concentración de ozono superficial. El cual es un contaminante que afecta directamente a la salud pública. Para ello seleccionaremos un  conjunto de variables meteorológicas que  mediante un proceso iterativo iremos hemos eliminado aquellas que nos aporten menos información sobre la variación de ozono. Finalmente tendremos un modelo de  4 variables: el geopotencial en altura a 500 hPa, la humedad relativa, la radiación de onda corta y el indice de elevación superficial. Hemos hecho un análisis cualitativo de la influencia de estas variables en el ozono troposférico. Finalmente, hemos concluido con unas sugerencias para mejorar la del método  y con las posibles aplicaciones que se le podrían dar a los resultados de este trabajo.
+\section*{Abstract}
+The aim of this  work is  to analyse which are the most relevant variables to determine the ozone concentration, which is one important pollutant that affects human health. We selected meteorological variables and  using an iterative procces we have deleted those variables which provided less information on the ozone variation. We finally chose a 4 variable model which provided the most meaningful information: the short wave flux, geopotential height at 500 hPa, relative humidity and surface lifted index. A qualitative analysis of those variables has been done. Finally  we have given some guidance on how to improve the model and discused some  possible aplications of this work.
+
+\end{center}
+\newpage
+\section{Introducción} \label{sec:introduccion}
+
+
+La contaminación del aire se debe a una combinación de altas emisiones de contaminantes y una meteorología desfavorable. 
+Debido a que entramos en una época de cambio climático acelerado las implicaciones de este en  la calidad del aire deben ser estudiadas con el proposito de entender sus consecuencias.
+
+El ozono superficial y las partículas en suspensión (PM) son dos de los contaminantes atmosféricos que más conciernen a la salud pública.
+\begin{itemize}
+\item El ozono se produce en la  troposfera por la oxidación fotoquímica del óxido de carbono (CO), metano y compuestos orgánicos volátiles (COV). En ausencia de COVs se  encuentra en un estado estacionario conocido como ``photochemical steady state''. Este equilibrio  crea ozono al mismo tiempo que lo destruye y es un proceso complicado en el que intervienen diversos factores y elementos. Podemos ver  de forma simplificada una aproximación en la siguiente ecuación. 
+\begin{eqnarray}
+NO_2 + h\nu \rightarrow NO + O \nonumber \\
+O + O_2 \rightarrow O_3 \nonumber \\
+O_3 + NO \rightarrow NO_2  + O_2 \nonumber 
+\end{eqnarray}
+
+Este estado estacionario  se ve modificado en presencia de COVs, los cuales se oxidan para producir radicales peróxilos $(HO_2)$, óxidos de nitrógeno y $(NO_x)$. Deja así de estar en un estado estacionario y aumenta la  producción de ozono troposférico.
+
+ Un ejemplo sería el de la fotólisis del fomaldehidos, pues en estos hace falta una radiación incidente para que se altere el estado estacionario de la atmósfera produciendo ozono.
+\begin{eqnarray}
+HCHO + h\nu (\lambda < 370nm) \rightarrow 2HO_2 + CO
+\end{eqnarray}
+
+Este ecuación es un ejemplo sencillo de los procesos fotoquímicos  de la atmósfera  que  por lo general son bastante más complicados. 
+
+
+La principales factores que hacen que aumente el ozono troposférico son la temperatura y la estabilidad atmosférica \citep{ordonez2005}
+
+
+
+El tiempo de vida del ozono en la troposfera oscila desde unos pocos días en la capa límite hasta varias semanas en la troposfera libre. 
+
+%% Noestoy seguro de si se traduce así
+\item Las partículas en suspensión (PM) principalmente son: sulfato, nitrato, carbón orgánico, carbón elemental, polvo y aerosol marino. Las primeras 4 componentes son partículas finas con un diámetro menor a $2.5\mu m$ y estas  influyen mucho en  la salud humana. Las PM son generalmente vistas como un problemas de la  calidad del aire durante todo el año.  La variación por temporadas es compleja y con una dependencia local. Las  disminución de PM  viene principalmente asociada a la precipitación, al aumetno de la altura de la capa límite planetaria (CLP) y a los vientos intensos.
+\end{itemize}
+%No tengo claro de si poner lo que viene a continuación
+
+
+Durante los meses de verano, en condiciones de estabilidad atmosférica, las concentraciones cercanas a la superficie de ozono pueden alcanzar altos niveles, causando daño a la salud, a la vegetación  y a los materiales.
+
+ Debido al  aumento  de las emisiones de  precursores de ozono en Europa y en el mundo industrial durante el periodo comprendido entre 1950 y 1990 \citep{staehelin1994}, las concentraciones de ozono superficial en las zonas rurales han aumentado en un factor dos.
+ 
+ % El Ozono troposférico es un  gas de efecto invernadero, esto quiere decir que absorbe y emite radiación dentro del rango infrarojo. Otros gases importantes de efecto invernadero son el vapor de agua, el dióxido de carbono ($CO_2$) y el óxido de nitrógeno(NO). 
+
+
+
+Como consecuencia del calentamiento global se espera que la producción de $O_3$ aumenten en las regiones contaminadas. La variación de la emisión de ozono con la temperatura queda determinada por la presencia de  varios factores. La dependencia de estos factores con la temperatura es difícil de determinar como intentaremos explicar en las próximas secciones \ref{subsec:4.1}.
+
+
+Las emisiones de contaminantes a la atmósfera en general pueden agruparse de la siguiente manera.
+\begin{description}
+\item[Antropogénicas.] Son las emisiones producidas por el ritmo de vida del ser humano. Estas pueden depender o no de la temperatura. Por ejemplo, las producidas por la emisión de los gases de los vehiculos debido al tráfico diario no dependen de la temperatura. Hay otras que sí dependen como puede ser la evaporación de los gases contaminantes en una gasolinera.
+\item[ Biogénicas.] La dependencia de estas emisiones con  la temperatura  a pesar de   estár cuantificada tiene una gran incertidumbre \citep{guenther} Por ejemplo, la  evaporación o la emisión natural de las plantas a la atmósfera sí depende de factores meteorológicos como la temperatura. La vegetación es una emisora importante de  COVs.
+\end{description}
+
+Existe una gran variación  interanual de las variables meteorológicas. Tiene sentido estudiar la variación  anual pues afecta directamente a las concentraciones diarias de contaminantes atmosféricos, como podemos ver en la Figura \ref{figura1}. En esta imagen trataremos de ver la importancia de ajustar la cantidad de $O_3$  a las condiciones meteorológicas.%Numero figura, y mencionar que está obtenida del artículo meteo ozono
+%¿¿ Unidades de la gráfica  PPB????
+\begin{figure}[h]
+\centering
+    \includegraphics[width=0.9\textwidth]{varozo.jpg}
+    \caption[Diferencia interanual de ozono con y sin ajuste meteorológico]{En las dos gráficas superiores se representa la media de ozono en 2004 y 2005. Las dos gráficas inferiores muestran el porcentaje de diferencia de Ozono  antes y despues del ajuste meteorógico}\label{figura1}
+\end{figure}
+
+
+La figura \ref{figura1}   nos muestra la importancia de usar un ajuste meteorológico cuando observamos la  variación de ozono. Esta gráfica pertenece a un estudio realizado por  \citep{camalier2017}  en la zona este de Estados Unidos. Observamos en los dos cuadrantes superiores que la concentración de ozono en 2005 es muy superior  a la  concentración en 2004 . La concentración de ozono en 2004 solo está entorno a las  60 partículas por billón (ppb) en una zona pequeña en comparación con 2005 en la que la  concentración de ozono es superada en la mayor parte de la zona continental. La gráfica inferior izquierda nos muestra la variación porcentual entre 2004 y 2005,  observándose que en el interior del continente la variación está entorno a un 15-20 \%. Tras ajustar con las variables meteorológicas la variación de un año a otro se ve profundamente modificada dónde no se llegan a alcanzar los  valores de 5\%. Por ello, podemos concluir que las diferencias entre 2004 y 2005 en esta zona de Estados Unidos son debidas principalmente a la meteorología y no a la variación de las emisiones de los compuestos precursores.
+ 
+
+ La correlación de la concentración de contaminantes con la meteorología  ha sido un campo de estudio durante las últimas 30 décadas, con tres objetivos principales
+ \begin{enumerate}
+ \item Eliminar el efecto de la variabilidad meteorológica en los análisis a largo plazo sobre la tendencia de la calidad del aire.
+ \item Crear modelos empíricos para la previsión de predictores de calidad del aire.
+ \item Conseguir una mejor percepción de los procesos que afectan a las concentraciones de contaminantes.
+ \end{enumerate}
+ 
+ Trataremos de centrar nuestro estudio en los meses de verano, pues son los más afectados por la concentración de ozono debido a las altas temperaturas. Como podemos ver en el estudio de \citet{hamdy}, la concentración media de $O_3$ en Junio en la ciudad de El Cairo, es de $79\mu gm^{-3}$ y  la concentración en diciembre $6\mu gm^{-3}$. Este incremento en la concentración de ozono se debe a los mecanismos de producción fotoquímica del ozono, que son catalizados debido a la  alta intensidad de radiación solar; mientras  las bajas concentraciones en invierno se deben a una baja intensidad de radiación solar. 
+
+\section{Objetivos} \label{sec:objetivos}
+El objetivo principal de este Trabajo de Fin de Grado  es estudiar el efecto de la variación de la meteorología en relación con los contaminantes atmosféricos en la ciudad de Biella, Italia. 
+
+A la vista de la influencia de la meteorología en las concentraciones de contaminantes, trataremos de hacer correcciones a la cantidad de ozono  medido. 
+
+Finalmente, trataremos de determinar si la variación interanual de  ozono medido en la atmósfera depende de los factores meteorológicos o de otras fuentes como pueden ser las emisiones antropogénicas o industriales.
+
+Partiremos inicialmente del siguiente gráfico (Figura \ref{fig:2} ), que nos permite ver la concentración de ozono troposférico que hay en la ciudad de Biella entre los años 1998 y 2012.
+
+\newpage
+
+\begin{figure}[h!]
+\centering
+    \includegraphics[width=0.4\textwidth]{ozonoinicial.png}
+    \caption[Cantidad de Ozono medido en Biella]{Evolución de las concentraciones de ozono $(\mu g  m^{-3})$ medido en la ciudad de Biella entre los veranos de los años 1998 y 2012}\label{fig:2}
+\end{figure}
+
+
+
+
+\section{Metodología} \label{sec:metodología}
+
+Trataremos de usar un modelo estadístico lineal  que intente ajustarse a la variación de ozono en función de la meteorología. Este modelo no es del todo correcto pues  tanto  la producción de ozono como el tiempo de residencia  de este en la atmósfera no son lineales. Como consecuencia de ellos será complicado  que nos ajustemos a los valores medidos.
+
+Cada variable desempeña un rol único en cada estación meteorológica pues los efectos de los diferentes parámetros van cambiando en función de la estación y de la época del año \citep{ordonez2005}. %Esto podemos observarlos en la siguiente tabla  realizada por 
+%%Ordoñez
+%\begin{figure}[h!]
+%\centering
+ %   \includegraphics[width=0.9\textwidth]{var.jpg}
+%    \caption[Parámetros relevantes en diferentes estaciones]{Número de  estaciones ( 12 estaciones ) en las que el parámetro seleccionado por estación es relevante tras alguna iteracíones ANCOVA. }
+%\end{figure}
+
+%Podemos apreciar que las variables meteorológicas son diferentes en función de la estación y de la temporada en la que nos encontremos. 
+En este TFG nos centramos en la estación de Biella en Italia  durante los meses de verano que son los más afectados por la contaminación de Ozono debido, en principio,  a las altas  temperaturas que  nos permiten tener mayores valores de correlación.
+
+Los parámetros estimados por este modelo nos proveen una visión general  a la respuesta del ozono con cada variable meteorológica. 
+
+Los datos meteorológicos que se van a emplear son los publicados por el National Center for Enviromental Prediction (NCEP) y el National Center for Atmospheric Reanalisis (NCAR). Estos datos son accesibles desde la web \href{https://www.esrl.noaa.gov/}{Earth System Research Laboratory} %% He asumido que la web de donde se han sacado los datos es la misma que al de las prácticas de meteo.
+Los datos usados provienen de campos interpolados para todo el globo a una malla regular de 2.5º de resolución espacial y varios niveles de altura, aunque el reanalisis proporciona hasta 17 niveles verticales en la atmósfera y en algunas variables resoluciones espaciales inferiores a 2.5º\citep{ncar}. Los datos usados son el resultado de la asimilación de diferentes medidas (sondeos, radiosondeos, datos de satélites, datos observados en superficies y océanos, medidas tomadas desde aviones, \ldots) en un modelo físico que, a su vez, realiza la interpolación para obtener los datos sobre una malla regular. 
+
+
+Utilizaremos series temporales con promedios diarios. 
+\begin{itemize}
+\item Una media móvil de las 8 horas en un día en la que las concentraciones medidas de ozono alcanzan los niveles más altos.
+\item Variables metereológicas; $x_1,x_2,x_3\ldots$, procedentes de un reanálisis NCEP/NCAR.
+\end{itemize}
+
+Filtraremos los datos para usar sólo los meses de verano (junio, julio y agosto) que son aquellos donde las temperaturas son más altas y obtendremos mayores valores de correlación.
+
+Usaremos un modelo de regresión lineal simple, con el objeto de ver que   variables  $x_1,x_2,x_3\ldots$ determinan la variabilidad de las concentraciones superficiales de $O_3$ de un día a otro. 
+\begin{equation}
+MDA8  O_3= a + b\cdot x_1 + c \cdot x_2 + d\cdot x_3 \ldots
+\end{equation}
+
+
+Para ellos se utilizará el método de eliminación hacia atrás paso a paso (backward stepwise regression). No sólo es relevante la meteorología sino que también hay factores que pueden ser relevantes como el que sea día laborable o fin de semana. Así  se observa en nuestro modelo lineal:
+\begin{equation}
+O^3=a + b\cdot T + c \cdot Rad+d\cdot u + e\cdot v \ldots
+\end{equation}
+
+
+No es importante el orden de magnitud de  los coeficientes del ajuste dado que van multiplicados por la magnitud de cada variable.
+
+
+%En el modelo0 usado la probabilidad calculada es la probabilidad de que el coeficiente sea nulo de modo que cuanto menor sea la probabilidad mucho mejor. 
+Tras introducir todos las variables en el modelo procederemos de forma iterativa a ir eliminando una a una la variable cuya probabilidad de que el coeficiente sea cero sea mayor. 
+
+Este proceso iterativo, que utiliza un análisis de variables (estadístico F de Fischer), parará una vez que las variables que nos queden tengan  el siguiente coeficiente de probabilidad nulo:
+\begin{eqnarray}
+p=10^{-8} \rightarrow prob=(1-p)*100=0.9999999
+\end{eqnarray}
+Esta es una medida muy restrictiva pues buscamos quedarnos solo con las pocas variables que contengan la mayor información posible.
+%%LEER SOBRE ESTADÍSTICA F FISHER
+
+En nuestro modelo lineal los residuos son igual a la diferencia entre la predicho  y lo observado. Si el modelo es robustos los residuos serán aleatorios.\\
+
+
+Las variables utilizadas en el código son las siguientes:
+
+\begin{description}
+\item[vwnd ] - Viento zonal a 10 m Este viento está tomado a una altura de 10 metros. Las unidades son metros por segundo. Este viento va de Oeste a Este. Las unidades son $m/s$.
+\item[vwind ] - Viento meridional 10m Este viento está tomado a una altura de 10 metros. Las unidades son metros por segundo. Este viento va de Sur a Norte. Las unidades son $m/s$.
+%%%%Describir geopotencial.
+\item[uwind850 ] - Viento zonal a un altura geopotencial de 850 hPa (aproximadamente 1500m).Las unidades son $m/s$.
+\item[vwind850 ] - Viento meridional a una altura  geopotencial de 850hPa. Las unidades son $m/s$.
+\item[rhum] - Humedad relativa. Es la presión de vapor de agua  respecto a la presión de vapor de saturación $HR=\frac{e}{e_w(T)}$(\%).
+\item[shum] - Humedad Específica. Fracción de masa de vapor de agua respecto a la masa de aire húmedo $q \equiv \frac{m_v}{m}$ a una altura de 2 metros.$(g/kg)$
+\item[dlwrf] -  Flujo IIncidente Radiativo de Onda Larga. Las unidades son $W/m^2$.
+\item[dswrf] -  Flujo Incidente Radiativo Solar. Las unidades son $W/m^2$.
+\item[tcdc] - Porcentaje del cielo cubierto por nubes. Está generalmente correlacionado con la duración de la luz solar. La cobertura del cielo en la termodinámica de la atmósfera juega un papel  importante en el balance de energia pues las nubes reflejan parte de la radiación solar.(\%)
+\item[prate] -  Indice de precipitación $(Kg/m^2 /s)$
+\item[cprate] -  Indice de precipitación convectiva, producida cuando el aire asciende por diferencia de temperatura a causa de un calentamiento local (ascensión convectiva). Este calentamiento produce una disminución de la densidad del aire y, por consiguiente, el ascenso del mismo. En este ascenso del aire inestable se forman nubes de desarrollo vertical, dando lugar en determinados casos a precipitación. $(Kg/m^2 /s)$
+\item[slp] -  Presión a nivel del mar. En regiones montañosas la diferencia de presión entre distintos observatorios varía principalmente por la altura de estos.Para elaborar mapas de presión en zonas con diferente topografía reducimos los valores de presión a un nivel de referencia, el nivel medio del mar.  $(hPa)$
+\item[hgt] \label{itm:hgt} - Altura del Geopotencial a la altura de 500hPa. El geopotencial $\phi$ en cualquier punto de la atmósfera se define como el trabajo que debe realizarse contra la fuerza de la gravedad necesario para elevar una masa de aire desde el nivel del mar hasta dicho punto. En concreto la altura típica de un geopotencial de 500hPa es de aproximadamente unos 5500 metros de altura.
+\item[lftx] \label{itm:lftx} -  Surface Lifted Index, es la diferencia de temperatura entre la temperatura ambiente y la temperatura de una parcela que asciende adiabáticamente hasta una presión de 500hPa. Es un indicador de estabilidad en la atmósfera, cuando el valor dado es positivo la atmósfera es estable y cuando es negativo inestable.$(K)$
+\end{description}
+
+
+ 
+
+\section{Resultados}
+Los parámetros obtenidos en el  modelo que hemos usado nos proporcionan una pequeña percepción de cómo responde el ozono a cada variable meteorológica en la estación de Biella.
+
+Cada variable desempeña un valor único explicando las variaciones de ozono. Por ejemplo, hemos observado que el aumento de temperatura estaba relacionado con el aumento de ozono mientras que el aumento del viento zonal estaba relacionada con la disminución de la concentración de ozono.
+
+Inicialmente para poder ver la diferencia entre un modelo lineal y un modelo no lineal, hemos introducido en nuestro modelo lineal únicamente la variable T y en otro modelo   $T^2$. En el modelo de temperatura únicamente observamos una determinación de $R^2$ de un 0.3586, mientras que en el de $T^2$ observamos una correlación de un 0.4025. Por ello  podemos decir que experimentalmente el cuadrado de la temperatura predice más que la temperatura en modo lineal. 
+
+
+Nuestro modelo es lineal,  lo que lo hace un  modelo muy sencillo. Por ello no podemos exigirle correlaciones muy altas. Hemos usado la variable no lineal $T^2$, pero podríamos hacer uso de modelos mucho más complicados.  Observamos que la temperatura depende mejor de forma cuadrática que lineal, esto se debe a que en la naturaleza los procesos de producción de ozono son  complejos. Y los procesos naturales no tienen por que ser lineales, como podemos comprobar experimentalmente son no lineales. 
+
+
+Utilizando un modelo muchos más complejo que se ajustase a los parámetros de producción de Ozono podemos encontrar correlaciones mucho más altas. Como es el caso del artículo  \citep{camalier2017} 
+donde se  encuentran resultados con una correlación de hasta 0.80.
+
+
+
+Tras introducir las 14 variables descritas anteriormente y ejecutando el código (ver sección \ref{sec:metodología}) que nos irá eliminando iterativamente las variables cuyo coeficiente es mayor que cero, obtenemos que las variables que nos dan más información para el Ozono en Biella son cuatro :
+\begin{table}[]
+\centering
+\label{tabla}
+\begin{tabular}{|c|c|}
+\hline
+Variables                    & Coeficientes \\ \hline
+Radiación de onda corta (swf)   & ++                                \\
+Humedad Relativa (hr)           & --                                 \\
+Geopotencial a 500hPa (hgt)     & ++                                 \\ 
+Indice de elevación superficial & -                           \\     \hline
+\end{tabular}
+\caption{Variables con mayor varianza explicada para Biella}\label{tabla}
+\end{table}
+
+
+La varianza explicada por el  modelo inicial es  de un 55.46\%. Tras imponer el restrictivo coeficiente de $p=10^{-8}$ obtenemos que únicamente con las cuatro variables mencionadas anteriormente la varianza es de  54.46\%. Vemos que aunque hayamos despreciado 10 variables, la perdida de información es únicamente de un 1\%. Esto se debe a que hay muchas variables que o bien contienen información redundante o  bien  no influyen la variabilidad de ozono.  No es importante el orden de magnitud de  los coeficientes del ajuste dado que van multiplicados por la magnitud de cada variable.
+
+\subsection{Interpretación  de las variables obtenidas} \label{subsec:4.1}
+Observando los resultados obtenidos en el modelo final vemos que el  indice de elevación superficial y la humedad relativa decrecen linearmente con la concentración de ozono. Debido a que el ozono tiene una respuesta no lineal para la mayoría de las variables, cuantificar este porcentaje es difícil, por lo que intentaremos dar una respuesta más cualitativa a los resultados de nuestro procedimiento estadístico.
+
+
+Podemos entender que altos niveles de humedad están usualmente asociados a una alta abundancia de nubes y a  inestabilidad atmosférica. La abundancia de nubes impide la penetración de la radiación solar lo que hace que los  procesos fotoquímicos sean ralentizados y el nivel de ozono troposférico descienda. La inestabilidad atmosférica por lo general viene asociada con precipitaciones que realizan un proceso de barrido de los contaminantes de la atmósfera. Esto podemos verlo en la gráfica \ref{fig:4}. 
+
+
+
+\begin{figure}[h]
+\centering
+    \includegraphics[width=0.75\textwidth]{humrel.png}
+    \caption[Concentración de Ozono y humedad relativa]{Representación gráfica de la concentración de Ozono (pollutant)  $(\mu g  m^{-3})$ respecto a la humedad relativa} \label{fig:4}
+\end{figure}
+En ella podemos ver cómo la concentración de ozono presenta una dependencia positiva con la radiación.  El coeficiente de determinación de la humedad específica con la concentración de ozono es de un 0.23.   %En el análisis estadístico hemos encontrado  que las  altas concentraciones de $O_3$ se dan generalmente con porcentajes  de humedad relativa inferiores. Esto  puede ser atribuido a la mejora de la oxidación de los hidrocarburos por la tarde, que respalda los mecanismos de producción de ozono.
+
+ Hemos encontrado que la radiación solar es mejor indicador que la temperatura debido a que esta aumenta la velocidad de las reacciones fotoquímicas en los diferentes  procesos de fotoxidación de la atmósfera. 
+Para nuestro caso particular, hemos obtenido una clara tendencia positiva de la radiación solar con el ozono. Como sabemos el ozono está relacionado directamente con los procesos fotoquímicos. Altas concentraciones de ozono son asociadas con altas radiaciones solares.
+
+La radiación es un factor determinante en los procesos de producción de ozono, como podemos ver en la gráfica \ref{fig:5}. En ella observamos cómo a medida que va aumentando la radiación incidente vamos obteniendo mayores valores de contaminación.
+\begin{figure}[h]
+\centering
+    \includegraphics[width=0.75\textwidth]{swfpoll.png}
+    \caption[Concentración de Ozono y radiación de onda corta]{Representación gráfica de la concentración de ozono (pollutant)  $(\mu g  m^{-3})$ respecto a la radiación de onda corta$(W/m^2)$} \label{fig:5}
+\end{figure}
+
+La otra variable con un índice de correlación alto es el geopotencial. El geopotencial, que lo hemos definido en la sección de metodología \ref{sec:metodología}, nos da un coeficiente positivo. Esto quiere decir que a medida que tenemos un mayor geopotencial tenemos una mayor concentración de ozono.
+
+El geopotencial a escala sinóptica, en este caso, es una medida de estabilidad de la atmósfera. Haciendo un análisis cualitativo un alto geopotencial nos está dando información de  que estamos en una situación estable meteorológica usualmente asociada a tiempos despejados donde la radiación incidente será mayor. Como hemos comentado antes una mayor radiación incidente fomenta la estimulación de los procesos de creación de ozono en la atmósfera.
+
+Por otro lado, una mayor estabilidad atmosférica favorece el estancamiento de las masas de aire, lo que permite que se acumulen los precursores y reaccionen durante mas tiempo. De esta manera se contribuye a una mayor concentración de la cantidad de ozono en la atmósfera.
+
+\begin{figure}[h]
+\centering
+    \includegraphics[width=0.75\textwidth]{geop.png}
+    \caption[Concentración de Ozono y la altura del geopotencial]{Representación gráfica de la concentración de ozono (pollutant)  $(\mu g  m^{-3})$ respecto a la altura del geopotencial(dam)} \label{fig:6}
+\end{figure}
+
+
+En la figura \ref{fig:6} podemos observar cómo a medida que la altura del geopotencial va aumentando obtenemos valores de concentración de ozono más elevados. Esto, como hemos dicho antes, se debe a la mejor penetración de la radiación solar y al aumento del tiempo para que ocurran los procesos químicos que dan lugar al ozono.
+
+La última variable obtenida por el modelo, [ltx] indice de elevación superficial, que es la diferencia de temperatura entre la temperatura ambiente y la temperatura de una parcela que asciende adiabáticamente hasta una presión de 500hPa. Es un indicador de estabilidad en la atmósfera, cuando el valor dado es positivo la atmósfera es estable y cuando es negativo inestable. Observando la tabla\ref{tabla} podemos que ver el coeficiente de determinación tiene un valor negativo.
+\begin{figure}[h]
+\centering
+    \includegraphics[width=0.75\textwidth]{surlift.png}
+    \caption[Concentración de Ozono vs indice de elevación superficial]{Representación gráfica de la concentración de ozono (pollutant)  $(\mu g  m^{-3})$ respecto al índice de elevación superficial} \label{fig:7}
+\end{figure}
+
+
+El indice de elevación como hemos definido anteriormente, es una medida indirecta de la temperatura y está usualmente asociada a la conveccion. A altas temperaturas la radiación térmica del suelo calienta la parcela de aire en el estrato más bajo, pudiendo provocar así una precipitación convectiva. Por eso, decimos que es una medida indirecta de la temperatura que nos indica también la presencia de una inestabilidad atmosférica. En la figura \ref{fig:7} podemos ver como depende la concentración de ozono troposférico con el índice de elevación superficial. Observamos que no esta relación no es tan evidente como en los otros casos, vease por ejemplo la figura \ref{fig:4}.
+
+La correcta explicación de esta variable es muy complicada dado que es un mecanismo metereológico no intuitivo.
+
+En esta sección hemos visto y analizado como influyen nuestras variables en la concentración de ozono. Observando las gráficas, en las que se ha representado de forma individual cada variable respecto  a la concentración de ozono, vemos de forma intuitiva cual será el signo del coeficiente de determinación de cada variable.
+\subsection{Ajuste meteorológico de la concentración de ozono}
+Uno de los objetivos de este tfg era poder hacer correcciones meteorológicas a la concentración de ozono medido. Podremos ver así si  la variación de ozono troposférico se debe a una meteorología desfavorable o a la producción de este. En la sección \ref{sec:objetivos} incorporamos la gráfica \ref{fig:2}, en la que podíamos observar la concentración de ozono medido en la estación de Biella. Tras elegir las variables meteorológicas más determinantes para esta estación  y realizar un ajuste con la ecuación  (5) podemos realizar una gráfica con la nueva cantidad de ozono ajustado.
+\begin{eqnarray}
+O_{3,ajustado}=\overline{medido}+ (medido -  predicho)
+\end{eqnarray}
+\begin{figure}[h]
+\centering
+    \includegraphics[width=0.9\textwidth]{ajust.png}
+    \caption[Ozono en Biella antes y depués de los ajustes metereológicos]{Representación gráfica de la concentración de ozono antes y después de realizar el ajuste metereológico} \label{fig:8}
+\end{figure}
+
+
+Observando la figura \ref{fig:8} observamos que ciertos puntos se han acercado al promedio. Esto puede interpretarse como que  durante esos años  las situaciones desfavorables de meteorología fomentaron la aparición de ozono troposférico en la atmósfera.
+
+Uno de estos puntos fue en 2003,en el  que vemos cómo se pasa de valores de  $160 \mu g m^{-3}$ a valores de  $145 \mu g m^{-3}$ tras el ajuste meteorológico. Este año hubo una intensa ola de calor \citep{schar2004}, que hizo que las temperaturas fueran más altas de lo normal y aumentase inusualmente la concentración de ozono. Esta ola de calor fué provocado por una situación anticiclónica con  valores altos de geopotencial. Como hemos visto en la interpretación de variables obtenidas \ref{subsec:4.1}, altas temperaturas y altos valores de geopotencial incrementan la concentración de ozono en la atmósfera. Se estima que esta ola de calor \citep{ricardo2010} estuvo relacionada con  unas 40,000 muertes, principalmente personas de edad avanzada.
+\newpage
+
+
+
+
+
+
+\section{Discusión}
+
+
+
+\subsection{Crítica al modelo}
+Como hemos dicho en las secciones anteriores (\ref{sec:metodología}), hemos usado un modelo lineal para intentar explicar la variación de la concentración de ozono con  las variables meteorológicas. Estas variación responde a  mecanismos complejos y no lineales. A pesar de esto hemos obtenido un coeficiente de $R^2$ de 0.5446 con solo 4 variables, mientras que con 14 variables obteníamos 0.5546.  Para mejorar este modelo podríamos mejorar varios factores.
+\begin{itemize}
+
+
+\item Inicialmente algunas de las variables  obtenidas mediante el reanalisis NCEP/NCAR no siguen una distribución gaussiana la cual sería la óptima para el ajuste estadístico. Un ejemplo sería la precipitación pues esta no sigue ningún parámetro predefinido. Para mejorarlo podríamos usar modelos nolineales, utilizar transformaciones logarítmicas \ldots. \citep{wilks}
+
+\item Respecto a los datos de reanálisis usados, hemos usado unos datos procedentes del reanalisis de una malla 2.5º que equivale a una celda  de unos 300km de lado. Nuestra estación se encuentra en una zona de gran variación orográfica \citep{andre}, de modo que la aproximación de una malla de 300km no es del todo precisa. 
+\end{itemize}
+\begin{figure}[h]
+\centering
+    \includegraphics[width=0.6\textwidth]{res1.png}
+    \caption[Residuos frente a valores ajustados]{Representación gráfica de los residuos obtenidos frente a los valores ajustados} \label{res1}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+    \includegraphics[width=0.6\textwidth]{res2.png}
+    \caption[``QQ plot'']{Representación gráfica del ``QQ plot''} \label{res2}
+\end{figure}
+
+  
+Atendiendo a la figura \ref{res1}, podemos ver los valores ajustados frente a los residuos. El modelo es una buena aproximación si los residuos generados son aleatorios, como es el caso. En los valores extremos (iniciales y finales) el promedio se desplaza ligeramente hacia arriba, por lo que en estas zonas las aproximaciones no son de tan buena calidad. Para profundizar los errores de los extremos atenderemos a la gráfica \ref{res2}, conocida como  ``QQ plot''.
+
+
+En estadística una gráfica Q-Q es un gráfico de probabilidad, el cual es un método gráfico de comparar dos distribuciones de probabilidad representando una frente a otra. 
+Si las dos distribuciones comparadas son idénticas la gráfica seguirá un linea de  $y=x$. Si ambas distribuciones están linearmente relacionados la gráfica seguirá una linea que no es necesariamente la linea $y=x$.  Si la tendencia de la gráfica Q-Q está menos inclinada que la linea  $y=x$ la distribución representada  en el eje horizontal está mas dispersa que la distribución vertical. En el caso contrario si la inclinación es mayor la distribución vertical está mas dispersa que la distribución horizontal. En nuestro caso observamos que se ajusta correctamente, excepto en las zonas inferiores y superiores. Esto se debe a que  el nuestro es un modelo lineal, y los fenómenos naturales no han de comportarse linearmente, por eso  los extremos tienden de diverger. También puede deberse a que nuestro modelo solo tiene las 4 variables que le aportan mayor información, incorporando mas variables estos extremos podrían  ajustarse.
+
+
+
+Esto nos puede ayudar a entender la relevancia de las variables obtenidas. Por ejemplo el geopotencial a 500hPa se encuentra a una altura sobre el nivel del mar de 5600m, ya perteneciente a la escala sinóptica, y  a estas alturas las variaciones orográficas son  de menor importancia. Mientras que en la temperatura, la diferencia entre una zona y otra es mayor y más en zonas montañosas. Si hubiéramos usado como datos la temperatura en superficie observada frente a la temperatura procedente de un reanalisis hubiéramos obtenido probablemente otros resultados. Este hecho no facilita el entendimiento de que se haya obtenido como una variable con un alto índice de varianza explicada $(R^2$) el índice de elevación superficial, pues los fenómenos convectivos ocurren generalmente a una escala más local. 
+\subsection{Posible aplicación del trabajo}
+Como hemos dicho anteriormente, en la sección \ref{sec:introduccion}, la variación de la concentración de contaminantes se debe a dos factores principales: la emisión de contaminantes y  meteorología.
+ 
+ \begin{itemize}
+ 
+ 
+\item  Con los datos obtenidos podemos extraer la variación de concentración debido a la meteorología e intentar quedarnos principalmente con la variación debido a la emisión. Esto es relevante dado que la variación meteorológica interanual tiene efectos importantes en la contaminación como podemos ver en la figura \ref{figura1}.
+ 
+ Observando la gráfica \ref{fig:8} vemos que hay una  tendencia en la concentración de ozono  a que vaya disminuyendo  cada año.  Esto es útil pues así podemos comprobar si los principales emisores de precursores de ozono y derivados ( industrias, vehículos, residuos \ldots ) han disminuido su emisión de contaminantes. Este parece ser el caso de la ciudad de Biella como podemos ver en la figura \ref{fig:8}, en la que observamos como la concentración de ozono ha ido disminuyendo anualmente.
+ 
+ \item Otra posible aplicación sería la prevención de los picos  diarios de máxima concentración de ozono. Ya hemos visto cuales son los factores que favorecen la concentración de ozono en una determinada zona. Observando la meteorología futura podemos determinar si nos encontramos ante una situación posible de altas concentraciones de contaminantes. Esto es  u método más sencillo, pero no tan eficiente, que  correr un modelo tridimensional con parametrizaciones físicas y químicas con objeto de predecir las concentraciones.
+ \end{itemize}
+\section{Conclusiones}
+En este trabajo de fin de grado hemos intentado estudiar cómo han variado las concentraciones de ozono con  las diferentes variables meteorológicas.
+
+
+Tras realizar un modelo estadístico lineal e ir eliminando una a una las variables menos significativas, nos hemos quedado finalmente con las cuatro  que nos han dado mas información sobre la variabilidad de las concentraciones de ozono de un día a otro debido a la meteorología: la altura geopotencial a 500hPa, la radiación de onda corta, la humedad relativa y el indice de elevación superficial.
+
+ Hemos hecho un análisis cualitativo (sección \ref{subsec:4.1}) sobre los coeficientes de las variables obtenidas (ver tabla \ref{tabla}), viendo que tenemos dos indicadores positivos y dos negativos. Los valores positivos del coeficiente de determinación, nos predicen que la concentración de ozono irá aumentando a medida que estas variables vayan aumentando. Con valor positivo hemos obtenido la altura geopotencial (figura \ref{fig:6}) y la radiación incidente de onda corta (figura \ref{fig:5}) ambos son indicadores de estabilidad atmosférica. Respecto a los coeficientes negativos hemos obtenido la humedad relativa (figura \ref{fig:4}) y el índice de elevación superficial (figura \ref{fig:7}) ambos son indicadores de inestabilidad atmosférica. Hemos conseguido finalmente un valor de $R^2$ de 0.5446 usando únicamente estas variables.
+
+%\section{Estadística Q-Q}
+%En estadística una gráfica Q-Q es un gráfico de probabilidad, el cual es un método gráfico de comparar dos distribuciones de pr
+%Si la tendencia de la gráfica Q-Q está menos inclinada que la linea  $y=x$ la distribución representada  en el eje horizontal está mas dispersa que la distribución vertical. En el caso contrario si la inclinación es mayor la distribución vertical está mas dispersa que la distribución horizontal. En otros casos la distribución Q-Q está en forma de  ``S' '    o arqueada indicando que una de las dos distribuciones está más distorsionada que la otra. 
+
+
+
+
+\bibliographystyle{plainnat}
+\bibliography{bib}
+\end{document}
